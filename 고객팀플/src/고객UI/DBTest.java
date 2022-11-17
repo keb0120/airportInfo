@@ -67,6 +67,11 @@ public class DBTest {
 //		}
 		return list;
 	}
+	//파라미터를 쿼리에 넣기
+	public ArrayList<AirportList> getDatabyNearby() {
+		
+		return null;
+	}
 
 	//insert query
 //	public int insert(String sql) {

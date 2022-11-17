@@ -40,6 +40,8 @@ public class TablePanel extends JPanel {
         	data2[i][0] = alist[i].getKorNation();
         	data2[i][1] = alist[i].getIATACode();
         	data2[i][2] = alist[i].getKorName();
+        	//button 대신?링크?
+        	//https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=highkrs&logNo=220587752871
         	data2[i][3] = alist[i].getRegion();
         }
 

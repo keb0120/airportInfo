@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-
+//공항 찾기에 쓰이는 테이블
 public class TablePanel extends JPanel {
 
     private DefaultTableModel model;
@@ -26,7 +26,7 @@ public class TablePanel extends JPanel {
     DataTablePanel datatablePanel;
 
     public TablePanel() {
-        String[] a = { "Country", "AirportCode", "AirportName", "Travel More" };
+        String[] a = { "나라이름", "공항코드(IATA)", "공항이름", "Travel More" };
         String[][] b = {
                 { "대한민국", "INC", "인천국제공함" },
                 { "대한민국", "INC", "김포공항" },

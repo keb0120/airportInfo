@@ -82,5 +82,6 @@ public class MainFrameV2 extends JFrame {
 class Main4 {
     public static void main(String[] args) {
         MainFrameV2 mainFrameV2 = new MainFrameV2();
+        
     }
 }

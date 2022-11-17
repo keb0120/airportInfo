@@ -20,7 +20,7 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 //공항 찾기에 쓰이는 테이블
 public class TablePanel extends JPanel {
-
+	static int i=0;
 	static final int NAIRPORTS = 2603;
 	static final int NCOL = 3;
     private DefaultTableModel model;
@@ -29,24 +29,21 @@ public class TablePanel extends JPanel {
     DataTablePanel datatablePanel;
     ArrayList<AirportList> herelist = new ArrayList<AirportList>();
     DBTest dbtest1 = new DBTest();
-    String[][] data2 = new String[NAIRPORTS][NCOL];
+    String[][] data2 = new String[NAIRPORTS][4];
 
     public TablePanel() {
-        String[] a = { "나라이름", "공항코드(IATA)", "공항이름", "Travel More" };
-        String[][] b = {
-                { "대한민국", "INC", "인천국제공함" },
-                { "대한민국", "INC", "김포공항" },
-        };
-        
+        String[] header = { "나라이름", "공항코드(IATA)", "공항이름", "Travel More" };
+
     	herelist = dbtest1.getData();
     	AirportList[] alist = herelist.toArray(new AirportList[herelist.size()]);
         for(int i =0;i<herelist.size();i++) {
         	data2[i][0] = alist[i].getKorNation();
         	data2[i][1] = alist[i].getIATACode();
         	data2[i][2] = alist[i].getKorName();
+        	data2[i][3] = alist[i].getRegion();
         }
 
-        model = new DefaultTableModel(data2, a);
+        model = new DefaultTableModel(data2, header);
 
         table = new JTable(model); //
 
@@ -63,7 +60,6 @@ public class TablePanel extends JPanel {
         table.getColumnModel().getColumn(3).setCellEditor(new TableCell());
 
         setBounds(0, 0, 300, 150);
-
     }
 
     @SuppressWarnings("rawtypes")
@@ -76,11 +72,12 @@ public class TablePanel extends JPanel {
 
     class TableCell extends AbstractCellEditor implements TableCellEditor, TableCellRenderer {
         JButton jb;
-
-        public TableCell() {
+        public TableCell() {	
             jb = new JButton("--->");
+//            jb.putClientProperty("id", Integer.valueOf(i++));
             jb.addActionListener(e -> {
                 JTableTravelMore();
+//                System.out.println(jb.getClientProperty("id"));
             });
         }
 

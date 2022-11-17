@@ -15,6 +15,8 @@ public class DropdownPanel extends JPanel {
         this.country = new JComboBox<>();
         this.continent = new JComboBox<>();
         this.airport = new JComboBox<>();
+        // country db에서 받아넣기
+        //https://ssg4089.tistory.com/15 콤보박스 관련
         String[] countryArr = {"한국", "중국"};
         String[] continentArr = {"유럽", "아시아", "아프리카", "남아메리카", "북아메리카", "오세아니아"};
         String[] airportArr = {"국제공항", "국내공함"};

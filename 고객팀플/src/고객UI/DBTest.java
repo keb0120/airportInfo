@@ -69,7 +69,7 @@ public class DBTest {
 	}
 	//파라미터를 쿼리에 넣기
 	public ArrayList<AirportList> getDatabyNearby() {
-		
+		//버튼에 번호 매겨서 그 번호에 해당하는 airportlist[i].getICAOCODE()로 다시 쿼리로 쏘기?
 		return null;
 	}
 

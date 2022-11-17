@@ -13,15 +13,16 @@ public class DataTablePanel extends JPanel {
     JTable dataTable;
     JLabel text;
     ArrayList<AirportList> herelist = new ArrayList<AirportList>();
+    AirportList[] alist;
     
-    String[] header = { "나라명", "공항코드(IATA)", "공항명" };
+    String[] header = { "나라명", "공항코드(ICAO)", "공항명" };
     String[][] data2 = new String[NAIRPORTS][NCOL];
     DBTest dbtest1 = new DBTest();
     
     public DataTablePanel() {
     	
     	herelist = dbtest1.getData();   	
-    	AirportList[] alist = herelist.toArray(new AirportList[herelist.size()]);
+    	alist = herelist.toArray(new AirportList[herelist.size()]);
         for(int i =0;i<herelist.size();i++) {
         	data2[i][0] = alist[i].getKorNation();
         	data2[i][1] = alist[i].getIATACode();
@@ -33,5 +34,29 @@ public class DataTablePanel extends JPanel {
         this.add(textarea);
         this.add(scrollPane);
         this.setVisible(true);
+    }
+    public void updatePanel(String paramCode) {
+    	if(paramCode == null) {
+    		
+    	}else {
+            for(int i =0;i<herelist.size();i++) {
+//            	if(alist[i].getICAOCode().charAt(0) == paramCode.charAt(0)) {
+//    	        	data2[i][0] = alist[i].getKorNation();
+//    	        	data2[i][1] = alist[i].getIATACode();
+//    	        	data2[i][2] = alist[i].getKorName();
+    	        	System.out.println(i);
+            	
+//            	}
+//            	if(alist[i].getICAOCode().charAt(0) != ' ')
+//            	System.out.println(alist[i].getICAOCode().charAt(0) + i);
+            }
+            dataTable = new JTable(data2 , header);
+            JScrollPane scrollPane = new JScrollPane(dataTable);
+            JLabel textarea = new JLabel("더 여행 하고 싶은 곳이 있으신가요?");
+            this.add(textarea);
+            this.add(scrollPane);
+            this.setVisible(true);
+    	}
+
     }
 }

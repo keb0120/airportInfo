@@ -29,19 +29,18 @@ public class TablePanel extends JPanel {
     DataTablePanel datatablePanel;
     ArrayList<AirportList> herelist = new ArrayList<AirportList>();
     DBTest dbtest1 = new DBTest();
-    String[][] data2 = new String[NAIRPORTS][4];
+    String[][] data2 = new String[NAIRPORTS][NCOL];
 
     public TablePanel() {
-        String[] header = { "나라이름", "공항코드(IATA)", "공항이름", "Travel More" };
+        String[] header = { "나라이름", "공항코드(ICAO)", "공항이름", "Travel More" };
 
     	herelist = dbtest1.getData();
     	AirportList[] alist = herelist.toArray(new AirportList[herelist.size()]);
         for(int i =0;i<herelist.size();i++) {
         	data2[i][0] = alist[i].getKorNation();
-        	data2[i][1] = alist[i].getIATACode();
+        	data2[i][1] = alist[i].getICAOCode();
         	data2[i][2] = alist[i].getKorName();
- 
-        	data2[i][3] = alist[i].getRegion();
+
         }
 
         model = new DefaultTableModel(data2, header);
@@ -65,22 +64,22 @@ public class TablePanel extends JPanel {
 
     @SuppressWarnings("rawtypes")
 
-    public void JTableTravelMore() {
+    public void JTableTravelMore(String paramAirportCode) {
         sc.setVisible(false);
+        datatablePanel.updatePanel(paramAirportCode);
         add(datatablePanel);
         datatablePanel.setVisible(true);
     }
 
     class TableCell extends AbstractCellEditor implements TableCellEditor, TableCellRenderer {
         JButton jb;
+        String nearbyAirportCode;
         public TableCell() {	
             jb = new JButton("--->");
-//            jb.putClientProperty("id", Integer.valueOf(i++));
             jb.addActionListener(e -> {
-               	//button 대신?링크?
-            	//https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=highkrs&logNo=220587752871
-            	System.out.println(table.getValueAt(table.getSelectedRow(), 1));
-                JTableTravelMore();
+            	nearbyAirportCode = (String) table.getValueAt(table.getSelectedRow(), 1);
+            	System.out.println(nearbyAirportCode);
+                JTableTravelMore(nearbyAirportCode);
             });
         }
 

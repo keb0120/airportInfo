@@ -13,7 +13,7 @@ public class DBTest {
 	
 	private static final String USERNAME = "root";//DBMS접속 시 아이디
     private static final String PASSWORD = "1234";//DBMS접속 시 비밀번호
-    private static final String URL = "jdbc:mysql://localhost:3306/test?serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/airportdb?serverTimezone=UTC";
 	
 	public DBTest() {
 		try {
@@ -30,7 +30,7 @@ public class DBTest {
 	}
 	public ArrayList<AirportList> getData() {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select * from airportinfo order by 영문국가명 asc");
+		sql.append("select * from airportInfo order by 영문국가명 asc");
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
@@ -69,44 +69,37 @@ public class DBTest {
 	}
 	//파라미터를 쿼리에 넣기
 	public ArrayList<AirportList> getDatabyNearby() {
-		//버튼에 번호 매겨서 그 번호에 해당하는 airportlist[i].getICAOCODE()로 다시 쿼리로 쏘기?
+		
 		return null;
 	}
-
-	//insert query
-//	public int insert(String sql) {
-//		int id = -1;
-//
-//		// SQL을 적는 문서파일
-//		Statement statement = null;
-//		// SQL의 실행결과 보고서
-//		ResultSet rs = null;
-//
-//		try {
-//			statement = conn.createStatement();
-//			statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-//			rs = statement.getGeneratedKeys();
-//			if (rs.next()) {
-//				id = rs.getInt(1);
-//			}
-//		} catch (SQLException e) {
-//			System.out.println("[INSERT 쿼리 오류]\n" + e.getStackTrace());
-//		}
-//
-//		try {
-//			if (statement != null) {
-//				statement.close();
-//			}
-//
-//			if (rs != null) {
-//				rs.close();
-//			}
-//		} catch (SQLException e) {
-//			System.out.println("[INSERT 종료 오류]\n" + e.getStackTrace());
-//		}
-//
-//		return id;
-//	}
+	public String[] getRegions() {
+		String[] data = new String[8];
+		int index=0;
+		StringBuffer sql = new StringBuffer();
+		sql.append("select DISTINCT 지역 from airportInfo");
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) { 
+				data[index] = rs.getString(1);
+				index++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( " getData 오류" + e.getStackTrace());
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
 
 	public void close() {
 		try {

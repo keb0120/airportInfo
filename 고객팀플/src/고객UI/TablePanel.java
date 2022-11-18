@@ -40,7 +40,6 @@ public class TablePanel extends JPanel {
         	data2[i][0] = alist[i].getKorNation();
         	data2[i][1] = alist[i].getICAOCode();
         	data2[i][2] = alist[i].getKorName();
-
         }
 
         model = new DefaultTableModel(data2, header);
@@ -77,8 +76,8 @@ public class TablePanel extends JPanel {
         public TableCell() {	
             jb = new JButton("--->");
             jb.addActionListener(e -> {
-            	nearbyAirportCode = (String) table.getValueAt(table.getSelectedRow(), 1);
-            	System.out.println(nearbyAirportCode);
+//            	nearbyAirportCode = (String) table.getValueAt(table.getSelectedRow(), 1);
+//            	System.out.println(nearbyAirportCode);
                 JTableTravelMore(nearbyAirportCode);
             });
         }

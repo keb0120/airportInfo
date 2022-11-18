@@ -17,18 +17,17 @@ public class DropdownPanel extends JPanel {
         this.country = new JComboBox<>();
         this.continent = new JComboBox<>();
         this.airport = new JComboBox<>();
-        // country db에서 받아넣기
-        //https://ssg4089.tistory.com/15 콤보박스 관
-//        String[] countryArr = {"한국", "중국"};
+
+        String[] continentArr2 = {"유럽","아프리카","중동","북미","남미","중남미","아시아","대양주"};
+        String[] continentArr = dbtest.getData("지역");
         String[] airportArr = {"국제공항", "국내공함"};
       
-        String[] countryArr = dbtest.getNations();
-        String[] continentArr = dbtest.getRegions();
+        String[] countryArr = dbtest.getData("한글국가명");
         
-//        for (String str : continentArr) {
-//            continent.addItem(str);
-//            
-//        }
+        for (String str : continentArr) {
+            continent.addItem(str);
+            
+        }
         for (String str : countryArr) {
             country.addItem(str);
         }
@@ -47,7 +46,6 @@ public class DropdownPanel extends JPanel {
 				// TODO Auto-generated method stub
 				JComboBox cb = (JComboBox) e.getSource();
 				String index = cb.getSelectedItem().toString();
-				System.out.println(index);
 			}
 		});
         

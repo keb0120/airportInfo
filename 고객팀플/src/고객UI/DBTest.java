@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class DBTest {
 	Connection conn = null;
-	Statement stmt = null; // sql 실행
 	PreparedStatement pstmt = null;
 	ResultSet rs = null; // 레코드 탐색
 	int index =1;
@@ -34,6 +33,7 @@ public class DBTest {
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
+			pstmt.clearParameters();
 			while(rs.next()) { 
 				index = 1; 	//1부터 시작
 				String engName = rs.getString(index++);
@@ -53,10 +53,10 @@ public class DBTest {
 			System.out.println( " getData 오류" + e.getStackTrace());
 		}finally {
 			try {
-				pstmt.clearParameters();
+//				pstmt.clearParameters();
 				if(rs != null) rs.close();
-//				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
+				if(pstmt != null) pstmt.close();
+//				if(conn != null) conn.close();
 			} catch (SQLException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -73,56 +73,29 @@ public class DBTest {
 		
 		return null;
 	}
-	public String[] getRegions() {
-		String[] data = new String[8];
+	public String[] getData(String target) {
+		String[] data = new String[2000];
 		int index=0;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select DISTINCT 지역 from airportInfo");
+		sql.append("select DISTINCT " + target +" from airportInfo");
 		try {
+			//connn close 해서 메서드 2번 이상 사용시 오류 있었던것
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
-			
+			pstmt.clearParameters();
 			while(rs.next()) { 
 				data[index] = rs.getString(1);
 				index++;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println( " getRegion 오류" + e.getStackTrace());
+			System.out.println( " getdata" + target+ "오류" + e.getStackTrace());
 		}finally {
 			try {
-				pstmt.clearParameters();
+//				pstmt.clearParameters();
 				if(rs != null) rs.close();
-//				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-			} catch (SQLException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-		}
-		return data;
-	}
-	public String[] getNations() {
-		String[] data = new String[500];
-		int index=0;
-		StringBuffer sql = new StringBuffer();
-		sql.append("select DISTINCT 한글국가명 from airportInfo order by 한글국가명 asc");
-		try {
-			pstmt = conn.prepareStatement(sql.toString());
-			rs = pstmt.executeQuery();
-			while(rs.next()) { 
-				data[index] = rs.getString(1);
-				index++;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( " getnation 오류" + e.getStackTrace());
-		}finally {
-			try {
-				pstmt.clearParameters();
-				if(rs != null) rs.close();
-//				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
+				if(pstmt != null) pstmt.close();
+//				if(conn != null) conn.close();
 			} catch (SQLException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();

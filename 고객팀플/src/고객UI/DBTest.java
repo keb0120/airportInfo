@@ -53,8 +53,9 @@ public class DBTest {
 			System.out.println( " getData 오류" + e.getStackTrace());
 		}finally {
 			try {
+				pstmt.clearParameters();
 				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
+//				if(pstmt != null) pstmt.close();
 				if(conn != null) conn.close();
 			} catch (SQLException e2) {
 				// TODO Auto-generated catch block
@@ -87,11 +88,40 @@ public class DBTest {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println( " getData 오류" + e.getStackTrace());
+			System.out.println( " getRegion 오류" + e.getStackTrace());
 		}finally {
 			try {
+				pstmt.clearParameters();
 				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
+//				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
+	public String[] getNations() {
+		String[] data = new String[500];
+		int index=0;
+		StringBuffer sql = new StringBuffer();
+		sql.append("select DISTINCT 한글국가명 from airportInfo order by 한글국가명 asc");
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			while(rs.next()) { 
+				data[index] = rs.getString(1);
+				index++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( " getnation 오류" + e.getStackTrace());
+		}finally {
+			try {
+				pstmt.clearParameters();
+				if(rs != null) rs.close();
+//				if(pstmt != null) pstmt.close();
 				if(conn != null) conn.close();
 			} catch (SQLException e2) {
 				// TODO Auto-generated catch block

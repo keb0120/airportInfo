@@ -19,15 +19,16 @@ public class DropdownPanel extends JPanel {
         this.airport = new JComboBox<>();
         // country db에서 받아넣기
         //https://ssg4089.tistory.com/15 콤보박스 관
-        String[] countryArr = {"한국", "중국"};
+//        String[] countryArr = {"한국", "중국"};
         String[] airportArr = {"국제공항", "국내공함"};
       
+        String[] countryArr = dbtest.getNations();
         String[] continentArr = dbtest.getRegions();
         
-        for (String str : continentArr) {
-            continent.addItem(str);
-            
-        }
+//        for (String str : continentArr) {
+//            continent.addItem(str);
+//            
+//        }
         for (String str : countryArr) {
             country.addItem(str);
         }

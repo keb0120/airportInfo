@@ -101,7 +101,7 @@ public class TablePanel extends JPanel {
     }
 
     public void setDataByDropdown(String country, String airport, String continent) {
-
+    	//sql 쿼리 던지기
     }
 
     public void setDataByIATA(String airportCode) {

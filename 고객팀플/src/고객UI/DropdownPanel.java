@@ -46,6 +46,7 @@ public class DropdownPanel extends JPanel {
 				// TODO Auto-generated method stub
 				JComboBox cb = (JComboBox) e.getSource();
 				String index = cb.getSelectedItem().toString();
+				// 대륙 선택시 나오는 국가 재설정 case문
 			}
 		});
         

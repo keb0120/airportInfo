@@ -27,6 +27,7 @@ public class DBTest {
             } catch (SQLException e1) {    }
         }
 	}
+	//파라미터에 country airport continent 넣기
 	public ArrayList<AirportList> getData() {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select * from airportInfo order by 영문국가명 asc");
@@ -74,12 +75,12 @@ public class DBTest {
 		return null;
 	}
 	public String[] getData(String target) {
-		String[] data = new String[2000];
+		String[] data = new String[500];
 		int index=0;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select DISTINCT " + target +" from airportInfo");
+		sql.append("select DISTINCT " + target +" from airportInfo order by "+target + " asc");
 		try {
-			//connn close 해서 메서드 2번 이상 사용시 오류 있었던것
+			//conn close 해서 메서드 2번 이상 사용시 오류 있었던것. 사용 끝나고 close 어디다 둬야할지 생각해야함
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			pstmt.clearParameters();

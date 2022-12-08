@@ -34,34 +34,34 @@ public class DataTablePanel extends JPanel {
         if(sc !=null) {
         	remove(sc);
         }
-//        JScrollPane scrollPane = new JScrollPane(dataTable);
         sc = new JScrollPane(dataTable);
         JLabel textarea = new JLabel("더 여행 하고 싶은 곳이 있으신가요?");
         this.add(textarea);
         this.add(sc);
         this.setVisible(true);
     }
-    public DataTablePanel(String paramCode) {
-//	3. updatePanel 메서드를 사용하려 했으나 문제가 있어보여 생성자로 다시 만들어봄 그러나 같은 문제가 발생. scrollpane에 add하는 과정에서 문제가 있을수도?
-    	if(paramCode == null) {
-    		System.out.println("updatepanel error");
-    	}else {
-    		//테스트용 임의 값 설정
-    		herelist = dbtest1.getDataByNearby("OMDB");
-    		for(int i =0;i<herelist.size();i++) {
-            	data2[i][0] = alist[i].getKorNation();
-            	data2[i][1] = alist[i].getIATACode();
-            	data2[i][2] = alist[i].getKorName();
-            }
-            dataTable = new JTable(data2 , header);
-            JScrollPane scrollPane = new JScrollPane(dataTable);
-            JLabel textarea = new JLabel("더 여행 하고 싶은 곳이 있으신가요?");
-
-            this.add(textarea);
-            this.add(scrollPane);
-            this.setVisible(true);
-            
-    	}
-    }
-    
+//    public DataTablePanel(String paramCode) {
+////	3. updatePanel 메서드를 사용하려 했으나 문제가 있어보여 생성자로 다시 만들어봄 그러나 같은 문제가 발생. scrollpane에 add하는 과정에서 문제가 있을수도?
+//    	if(paramCode == null) {
+//    		System.out.println("updatepanel error");
+//    	}else {
+//    		//테스트용 임의 값 설정
+//    		herelist = dbtest1.getDataByNearby("OMDB");
+//    		for(int i =0;i<herelist.size();i++) {
+//            	data2[i][0] = alist[i].getKorNation();
+//            	data2[i][1] = alist[i].getIATACode();
+//            	data2[i][2] = alist[i].getKorName();
+//            }
+//            dataTable = new JTable(data2 , header);
+//            JScrollPane scrollPane = new JScrollPane(dataTable);
+//            JLabel textarea = new JLabel("더 여행 하고 싶은 곳이 있으신가요?");
+//
+//            
+//            this.add(textarea);
+//            this.add(scrollPane);
+//            this.setVisible(true);
+//            
+//    	}
+//    }
+//    
 }

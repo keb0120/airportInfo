@@ -39,12 +39,12 @@ public class TablePanel extends JPanel {
 
     public void JTableTravelMore(String paramAirportCode) {
         sc.setVisible(false);
-//        datatablePanel = new DataTablePanel(paramAirportCode);
-        datatablePanel = new DataTablePanel();
+        datatablePanel = new DataTablePanel(paramAirportCode);
+//        datatablePanel = new DataTablePanel();
         add(datatablePanel);
         datatablePanel.setVisible(true);
-//        revalidate();
-//        repaint();
+        revalidate();
+        repaint();
     }
 	public void deleteDatatablePanel() {
 		datatablePanel.setVisible(false);
@@ -83,7 +83,6 @@ public class TablePanel extends JPanel {
     }
 
     public void setDataByDropdown(String country, boolean isInternational) {
-    	//2. sql 쿼리 던지기 후 드랍다운으로 설정된 값이 이전 값과 같아도 UI에 문제가 생김( 2번 이상 이 메서드가 실행되면 문제가 생기는것으로 보임 )
     	if(datatablePanel!=null){
     		deleteDatatablePanel();
     		String[] header = { "나라이름", "공항코드(ICAO)", "공항이름", "Travel More" };

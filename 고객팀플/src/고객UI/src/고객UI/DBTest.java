@@ -119,7 +119,7 @@ public class DBTest {
 	public ArrayList<AirportList> getDataByNearby(String code) {
 		ArrayList<AirportList> list = new ArrayList<AirportList>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("select * from airportInfo where '공항코드2(ICAO)' = \'"+ code + "\' order by 한글공항명 asc");
+		sql.append("select * from airportInfo where 공항코드2 LIKE \'"+ code.charAt(0) + "%%\' order by 한글국가명 asc");
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();

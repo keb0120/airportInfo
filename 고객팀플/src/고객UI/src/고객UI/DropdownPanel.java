@@ -20,7 +20,7 @@ public class DropdownPanel extends JPanel {
 
         String[] continentArr2 = {"유럽","아프리카","중동","북미","남미","중남미","아시아","대양주"};
         String[] continentArr = dbtest.getData("지역");
-        String[] airportArr = {"국제공항", "국내공함"};
+        String[] airportArr = {"전체공항", "국제공항"};
       
         String[] countryArr = dbtest.getData("한글국가명");
         
@@ -46,7 +46,7 @@ public class DropdownPanel extends JPanel {
 				// TODO Auto-generated method stub
 				JComboBox cb = (JComboBox) e.getSource();
 				String index = cb.getSelectedItem().toString();
-				// 대륙 선택시 나오는 국가 재설정 case문
+				// 대륙 선택시 나오는 국가 재설정 case문 구현 중
 			}
 		});
         

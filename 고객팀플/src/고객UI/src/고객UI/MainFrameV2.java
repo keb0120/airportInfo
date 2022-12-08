@@ -56,11 +56,21 @@ public class MainFrameV2 extends JFrame {
         dropdownPanel.dropdownBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String airport = (String) dropdownPanel.airport.getSelectedItem();
+            	boolean isInternational;
+//                String airport = (String) dropdownPanel.airport.getSelectedItem();
                 String continent = (String) dropdownPanel.continent.getSelectedItem();
                 String country = (String) dropdownPanel.country.getSelectedItem();
-                tabletestPanel.setDataByDropdown(country, airport, continent); // 드롭다운 데이터를 어케 받아오는지 몰라서 일단은 보류
+                if((String) dropdownPanel.airport.getSelectedItem() == "국제공항") {
+                	isInternational = true;
+                }else {
+                	isInternational = false;
+                }
+                // 1. 드롭다운으로 값 넘기면 테이블패널에서 받아온 값으로 공항정보리스트 만들기
+                tabletestPanel.setDataByDropdown(country,isInternational); 
                 tabletestPanel.setVisible(true);
+                                
+                revalidate();
+                repaint();
             }
         });
 

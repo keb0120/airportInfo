@@ -10,18 +10,20 @@ public class DataTablePanel extends JPanel {
 	
 	static final int NAIRPORTS = 2603;
 	static final int NCOL = 3;
+    private JScrollPane sc;
     JTable dataTable;
     JLabel text;
     ArrayList<AirportList> herelist = new ArrayList<AirportList>();
     AirportList[] alist;
-    
+	String[][] data2 = new String[NAIRPORTS][NCOL];
     String[] header = { "나라명", "공항코드(ICAO)", "공항명" };
-    String[][] data2 = new String[NAIRPORTS][NCOL];
+    
     DBTest dbtest1 = new DBTest();
     
     public DataTablePanel() {
-    	
-    	herelist = dbtest1.getData();   	
+    	//테스트용 임의값
+//    	herelist = dbtest1.getDataByNearby("OMAA");
+    	herelist = dbtest1.getData();
     	alist = herelist.toArray(new AirportList[herelist.size()]);
         for(int i =0;i<herelist.size();i++) {
         	data2[i][0] = alist[i].getKorNation();
@@ -29,34 +31,37 @@ public class DataTablePanel extends JPanel {
         	data2[i][2] = alist[i].getKorName();
         }
         dataTable = new JTable(data2 , header);
-        JScrollPane scrollPane = new JScrollPane(dataTable);
+        if(sc !=null) {
+        	remove(sc);
+        }
+//        JScrollPane scrollPane = new JScrollPane(dataTable);
+        sc = new JScrollPane(dataTable);
         JLabel textarea = new JLabel("더 여행 하고 싶은 곳이 있으신가요?");
         this.add(textarea);
-        this.add(scrollPane);
+        this.add(sc);
         this.setVisible(true);
     }
-    public void updatePanel(String paramCode) {
+    public DataTablePanel(String paramCode) {
+//	3. updatePanel 메서드를 사용하려 했으나 문제가 있어보여 생성자로 다시 만들어봄 그러나 같은 문제가 발생. scrollpane에 add하는 과정에서 문제가 있을수도?
     	if(paramCode == null) {
-    		
+    		System.out.println("updatepanel error");
     	}else {
-            for(int i =0;i<herelist.size();i++) {
-//            	if(alist[i].getICAOCode().charAt(0) == paramCode.charAt(0)) {
-//    	        	data2[i][0] = alist[i].getKorNation();
-//    	        	data2[i][1] = alist[i].getIATACode();
-//    	        	data2[i][2] = alist[i].getKorName();
-    	        	System.out.println(i);
-            	
-//            	}
-//            	if(alist[i].getICAOCode().charAt(0) != ' ')
-//            	System.out.println(alist[i].getICAOCode().charAt(0) + i);
+    		//테스트용 임의 값 설정
+    		herelist = dbtest1.getDataByNearby("OMDB");
+    		for(int i =0;i<herelist.size();i++) {
+            	data2[i][0] = alist[i].getKorNation();
+            	data2[i][1] = alist[i].getIATACode();
+            	data2[i][2] = alist[i].getKorName();
             }
             dataTable = new JTable(data2 , header);
             JScrollPane scrollPane = new JScrollPane(dataTable);
             JLabel textarea = new JLabel("더 여행 하고 싶은 곳이 있으신가요?");
+
             this.add(textarea);
             this.add(scrollPane);
             this.setVisible(true);
+            
     	}
-
     }
+    
 }

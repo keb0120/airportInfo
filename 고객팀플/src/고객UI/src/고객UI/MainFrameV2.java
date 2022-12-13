@@ -66,7 +66,9 @@ public class MainFrameV2 extends JFrame {
                 	isInternational = false;
                 }
                 // 1. 드롭다운으로 값 넘기면 테이블패널에서 받아온 값으로 공항정보리스트 만들기
-                tabletestPanel.setDataByDropdown(country,isInternational); 
+                if(tabletestPanel !=null) jPanel2.remove(tabletestPanel);
+                tabletestPanel = new TablePanel(country,isInternational);
+                jPanel2.add(tabletestPanel);
                 tabletestPanel.setVisible(true);
                                 
                 revalidate();

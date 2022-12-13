@@ -36,6 +36,65 @@ public class TablePanel extends JPanel {
     public TablePanel() {
 
     }
+    public TablePanel(String country, boolean isInternational) {
+    	if(datatablePanel!=null){
+    		deleteDatatablePanel();
+	
+    		String[] header = { "나라이름", "공항코드(ICAO)", "공항이름", "Travel More" };
+        	herelist = dbtest1.getDataByCountry(country,isInternational);
+        	AirportList[] alist = herelist.toArray(new AirportList[herelist.size()]);
+            for(int i =0;i<herelist.size();i++) {
+            	data2[i][0] = alist[i].getKorNation();
+            	data2[i][1] = alist[i].getICAOCode();
+            	data2[i][2] = alist[i].getKorName();
+            }
+            model = new DefaultTableModel(data2, header);
+            table = new JTable(model);
+            datatablePanel = new DataTablePanel();
+            if(sc !=null) {
+            	remove(sc);
+            }
+            sc = new JScrollPane(table);
+            add(sc);
+            datatablePanel.setVisible(false);
+            repaint();
+            DefaultTableModel m = (DefaultTableModel) table.getModel();
+            // 맨 마지막 줄에 행 추가
+
+            table.getColumnModel().getColumn(3).setCellRenderer(new TableCell());
+            table.getColumnModel().getColumn(3).setCellEditor(new TableCell());
+
+
+            setBounds(0, 0, 300, 150);
+    	}else {
+        	String[] header = { "나라이름", "공항코드(ICAO)", "공항이름", "Travel More" };
+        	herelist = dbtest1.getDataByCountry(country,isInternational);
+        	AirportList[] alist = herelist.toArray(new AirportList[herelist.size()]);
+            for(int i =0;i<herelist.size();i++) {
+            	data2[i][0] = alist[i].getKorNation();
+            	data2[i][1] = alist[i].getICAOCode();
+            	data2[i][2] = alist[i].getKorName();
+            }
+            
+            model = new DefaultTableModel(data2, header);
+            table = new JTable(model); //
+            datatablePanel = new DataTablePanel();
+            if(sc !=null) {
+            	remove(sc);
+            }
+            sc = new JScrollPane(table);
+            add(sc);
+            datatablePanel.setVisible(false);
+            repaint();
+            DefaultTableModel m = (DefaultTableModel) table.getModel();
+            // 맨 마지막 줄에 행 추가
+
+            table.getColumnModel().getColumn(3).setCellRenderer(new TableCell());
+            table.getColumnModel().getColumn(3).setCellEditor(new TableCell());
+
+            setBounds(0, 0, 300, 150);
+    	}
+   }
 
     @SuppressWarnings("rawtypes")
 
@@ -86,7 +145,8 @@ public class TablePanel extends JPanel {
 
     public void setDataByDropdown(String country, boolean isInternational) {
     	if(datatablePanel!=null){
-    		deleteDatatablePanel();	
+    		deleteDatatablePanel();
+	
     		String[] header = { "나라이름", "공항코드(ICAO)", "공항이름", "Travel More" };
         	herelist = dbtest1.getDataByCountry(country,isInternational);
         	AirportList[] alist = herelist.toArray(new AirportList[herelist.size()]);
@@ -96,7 +156,7 @@ public class TablePanel extends JPanel {
             	data2[i][2] = alist[i].getKorName();
             }
             model = new DefaultTableModel(data2, header);
-            table = new JTable(model); 
+            table = new JTable(model);
             datatablePanel = new DataTablePanel();
             if(sc !=null) {
             	remove(sc);
@@ -141,6 +201,7 @@ public class TablePanel extends JPanel {
 
             setBounds(0, 0, 300, 150);
     	}
+
 
      
     }

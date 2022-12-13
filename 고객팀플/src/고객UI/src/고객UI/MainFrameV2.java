@@ -1,4 +1,4 @@
-package °í°´UI;
+package ê³ ê°UI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -60,12 +60,12 @@ public class MainFrameV2 extends JFrame {
 //                String airport = (String) dropdownPanel.airport.getSelectedItem();
                 String continent = (String) dropdownPanel.continent.getSelectedItem();
                 String country = (String) dropdownPanel.country.getSelectedItem();
-                if((String) dropdownPanel.airport.getSelectedItem() == "±¹Á¦°øÇ×") {
+                if((String) dropdownPanel.airport.getSelectedItem() == "êµ­ì œê³µí•­") {
                 	isInternational = true;
                 }else {
                 	isInternational = false;
                 }
-                // 1. µå·Ó´Ù¿îÀ¸·Î °ª ³Ñ±â¸é Å×ÀÌºíÆĞ³Î¿¡¼­ ¹Ş¾Æ¿Â °ªÀ¸·Î °øÇ×Á¤º¸¸®½ºÆ® ¸¸µé±â
+                // 1. ë“œë¡­ë‹¤ìš´ìœ¼ë¡œ ê°’ ë„˜ê¸°ë©´ í…Œì´ë¸”íŒ¨ë„ì—ì„œ ë°›ì•„ì˜¨ ê°’ìœ¼ë¡œ ê³µí•­ì •ë³´ë¦¬ìŠ¤íŠ¸ ë§Œë“¤ê¸°
                 tabletestPanel.setDataByDropdown(country,isInternational); 
                 tabletestPanel.setVisible(true);
                                 
@@ -78,7 +78,7 @@ public class MainFrameV2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String search = searchPanel.searchText.getText();
-                tabletestPanel.setDataByIATA(search); // ¼­Ä¡ ÇßÀ»¶§ IATA ÄÚµå
+                tabletestPanel.setDataByIATA(search); // ì„œì¹˜ í–ˆì„ë•Œ IATA ì½”ë“œ
                 jPanel2.setVisible(true);
             }
         });

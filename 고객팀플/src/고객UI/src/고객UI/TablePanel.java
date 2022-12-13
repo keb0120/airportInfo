@@ -1,4 +1,4 @@
-package °í°´UI;
+package ê³ ê°UI;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-//°øÇ× Ã£±â¿¡ ¾²ÀÌ´Â Å×ÀÌºí
+//ê³µí•­ ì°¾ê¸°ì— ì“°ì´ëŠ” í…Œì´ë¸”
 public class TablePanel extends JPanel {
 	static int i=0;
 	static final int NAIRPORTS = 2603;
@@ -30,6 +30,8 @@ public class TablePanel extends JPanel {
     ArrayList<AirportList> herelist = new ArrayList<AirportList>();
     DBTest dbtest1 = new DBTest();
     String[][] data2 = new String[NAIRPORTS][NCOL];
+    
+    JTable dataTable;
 
     public TablePanel() {
 
@@ -85,7 +87,7 @@ public class TablePanel extends JPanel {
     public void setDataByDropdown(String country, boolean isInternational) {
     	if(datatablePanel!=null){
     		deleteDatatablePanel();
-    		String[] header = { "³ª¶óÀÌ¸§", "°øÇ×ÄÚµå(ICAO)", "°øÇ×ÀÌ¸§", "Travel More" };
+    		String[] header = { "ë‚˜ë¼ì´ë¦„", "ê³µí•­ì½”ë“œ(ICAO)", "ê³µí•­ì´ë¦„", "Travel More" };
         	herelist = dbtest1.getDataByCountry(country,isInternational);
         	AirportList[] alist = herelist.toArray(new AirportList[herelist.size()]);
             for(int i =0;i<herelist.size();i++) {
@@ -94,7 +96,7 @@ public class TablePanel extends JPanel {
             	data2[i][2] = alist[i].getKorName();
             }
             model = new DefaultTableModel(data2, header);
-            table = new JTable(model); //
+            table = new JTable(model); 
             datatablePanel = new DataTablePanel();
             if(sc !=null) {
             	remove(sc);
@@ -104,14 +106,15 @@ public class TablePanel extends JPanel {
             datatablePanel.setVisible(false);
             repaint();
             DefaultTableModel m = (DefaultTableModel) table.getModel();
-            // ¸Ç ¸¶Áö¸· ÁÙ¿¡ Çà Ãß°¡
+            // ë§¨ ë§ˆì§€ë§‰ ì¤„ì— í–‰ ì¶”ê°€
 
             table.getColumnModel().getColumn(3).setCellRenderer(new TableCell());
             table.getColumnModel().getColumn(3).setCellEditor(new TableCell());
 
+
             setBounds(0, 0, 300, 150);
     	}else {
-        	String[] header = { "³ª¶óÀÌ¸§", "°øÇ×ÄÚµå(ICAO)", "°øÇ×ÀÌ¸§", "Travel More" };
+        	String[] header = { "ë‚˜ë¼ì´ë¦„", "ê³µí•­ì½”ë“œ(ICAO)", "ê³µí•­ì´ë¦„", "Travel More" };
         	herelist = dbtest1.getDataByCountry(country,isInternational);
         	AirportList[] alist = herelist.toArray(new AirportList[herelist.size()]);
             for(int i =0;i<herelist.size();i++) {
@@ -119,6 +122,7 @@ public class TablePanel extends JPanel {
             	data2[i][1] = alist[i].getICAOCode();
             	data2[i][2] = alist[i].getKorName();
             }
+            
             model = new DefaultTableModel(data2, header);
             table = new JTable(model); //
             datatablePanel = new DataTablePanel();
@@ -130,7 +134,7 @@ public class TablePanel extends JPanel {
             datatablePanel.setVisible(false);
             repaint();
             DefaultTableModel m = (DefaultTableModel) table.getModel();
-            // ¸Ç ¸¶Áö¸· ÁÙ¿¡ Çà Ãß°¡
+            // ë§¨ ë§ˆì§€ë§‰ ì¤„ì— í–‰ ì¶”ê°€
 
             table.getColumnModel().getColumn(3).setCellRenderer(new TableCell());
             table.getColumnModel().getColumn(3).setCellEditor(new TableCell());

@@ -1,4 +1,4 @@
-package °í°´UI;
+package ê³ ê°UI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class DropdownPanel extends JPanel {
-
+    String[] countryArr;
     JComboBox<String> country, continent, airport;
     JButton dropdownBtn;
     DBTest dbtest = new DBTest();
@@ -18,22 +18,8 @@ public class DropdownPanel extends JPanel {
         this.continent = new JComboBox<>();
         this.airport = new JComboBox<>();
 
-        String[] continentArr2 = {"À¯·´","¾ÆÇÁ¸®Ä«","Áßµ¿","ºÏ¹Ì","³²¹Ì","Áß³²¹Ì","¾Æ½Ã¾Æ","´ë¾çÁÖ"};
-        String[] continentArr = dbtest.getData("Áö¿ª");
-        String[] airportArr = {"ÀüÃ¼°øÇ×", "±¹Á¦°øÇ×"};
-      
-        String[] countryArr = dbtest.getData("ÇÑ±Û±¹°¡¸í");
-        
-        for (String str : continentArr) {
-            continent.addItem(str);
-            
-        }
-        for (String str : countryArr) {
-            country.addItem(str);
-        }
-        for (String str : airportArr) {
-            airport.addItem(str);
-        }
+        String[] continentArr = dbtest.getContinentData();
+        String[] airportArr = {"ì „ì²´ê³µí•­", "êµ­ì œê³µí•­"};       
         
         country.setMaximumSize(new Dimension(115, 100));
         continent.setMaximumSize(new Dimension(115, 100));
@@ -46,14 +32,77 @@ public class DropdownPanel extends JPanel {
 				// TODO Auto-generated method stub
 				JComboBox cb = (JComboBox) e.getSource();
 				String index = cb.getSelectedItem().toString();
-				// ´ë·ú ¼±ÅÃ½Ã ³ª¿À´Â ±¹°¡ Àç¼³Á¤ case¹® ±¸Çö Áß
+				switch(index) {
+					case "ìœ ëŸ½":
+						country.removeAllItems();
+						countryArr = dbtest.getData("ìœ ëŸ½");
+				        for (String str : countryArr) {
+				            country.addItem(str);            
+				        }
+						break;
+					case "ì•„í”„ë¦¬ì¹´":
+						country.removeAllItems();
+						countryArr = dbtest.getData("ì•„í”„ë¦¬ì¹´");	
+				        for (String str : countryArr) {
+				            country.addItem(str);            
+				        }
+						break;
+					case "ì¤‘ë™": 
+						country.removeAllItems();
+						countryArr = dbtest.getData("ì¤‘ë™");
+				        for (String str : countryArr) {
+				            country.addItem(str);            
+				        }
+						break;
+					case "ë¶ë¯¸":
+						country.removeAllItems();
+						countryArr = dbtest.getData("ë¶ë¯¸");
+				        for (String str : countryArr) {
+				            country.addItem(str);            
+				        }
+						break;
+					case "ë‚¨ë¯¸":
+						country.removeAllItems();
+						countryArr = dbtest.getData("ë‚¨ë¯¸");
+				        for (String str : countryArr) {
+				            country.addItem(str);            
+				        }
+						break;
+					case "ì¤‘ë‚¨ë¯¸":
+						country.removeAllItems();
+						countryArr = dbtest.getData("ì¤‘ë‚¨ë¯¸");
+				        for (String str : countryArr) {
+				            country.addItem(str);            
+				        }
+						break;
+					case "ì•„ì‹œì•„":
+						country.removeAllItems();
+						countryArr = dbtest.getData("ì•„ì‹œì•„");
+				        for (String str : countryArr) {
+				            country.addItem(str);            
+				        }
+						break;
+					case "ëŒ€ì–‘ì£¼":
+						country.removeAllItems();
+						countryArr = dbtest.getData("ëŒ€ì–‘ì£¼");
+				        for (String str : countryArr) {
+				            country.addItem(str);            
+				        }
+						break;
+				}
 			}
-		});
-        
-        this.dropdownBtn = new JButton("°Ë»ö");
+		});        
+        for (String str : continentArr) {
+            continent.addItem(str);
+        }
+        for (String str : airportArr) {
+            airport.addItem(str);
+        }
 
-        this.add(country);
+        this.dropdownBtn = new JButton("ê²€ìƒ‰");
+
         this.add(continent);
+        this.add(country);
         this.add(airport);
         this.add(dropdownBtn);
     }

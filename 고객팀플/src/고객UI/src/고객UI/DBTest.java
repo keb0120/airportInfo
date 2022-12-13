@@ -1,43 +1,41 @@
-package °í°´UI;
+package ê³ ê°UI;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 public class DBTest {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
-	ResultSet rs = null; // ·¹ÄÚµå Å½»ö
+	ResultSet rs = null; // ë ˆì½”ë“œ íƒìƒ‰
 	int index =1;
 	
-	private static final String USERNAME = "root";//DBMSÁ¢¼Ó ½Ã ¾ÆÀÌµğ
-    private static final String PASSWORD = "1234";//DBMSÁ¢¼Ó ½Ã ºñ¹Ğ¹øÈ£
+	private static final String USERNAME = "root";//DBMSì ‘ì† ì‹œ ì•„ì´ë””
+    private static final String PASSWORD = "1234";//DBMSì ‘ì† ì‹œ ë¹„ë°€ë²ˆí˜¸
     private static final String URL = "jdbc:mysql://localhost:3306/airportdb?serverTimezone=UTC";
 	
 	public DBTest() {
 		try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            System.out.println("DB ·Îµù ¼º°ø");
+            System.out.println("DB ë¡œë”© ì„±ê³µ");
         } catch (Exception e) {
-            System.out.println("DB ·Îµù ½ÇÆĞ " + e.getStackTrace());
+            System.out.println("DB ë¡œë”© ì‹¤íŒ¨ " + e.getStackTrace());
             try {
                 conn.close();
             } catch (SQLException e1) {    }
         }
 	}
-	//ÆÄ¶ó¹ÌÅÍ¿¡ country airport continent ³Ö±â
+	//íŒŒë¼ë¯¸í„°ì— country airport continent ë„£ê¸°
 	public ArrayList<AirportList> getData() {
 		ArrayList<AirportList> list = new ArrayList<AirportList>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("select * from airportInfo order by ¿µ¹®±¹°¡¸í asc");
+		sql.append("select * from airportInfo order by ì˜ë¬¸êµ­ê°€ëª… asc");
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) { 
-				index = 1; 	//1ºÎÅÍ ½ÃÀÛ
+				index = 1; 	//1ë¶€í„° ì‹œì‘
 				String engName = rs.getString(index++);
 				String korName = rs.getString(index++);
 				String IATACode = rs.getString(index++);
@@ -52,7 +50,7 @@ public class DBTest {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println( " getData ¿À·ù" + e.getStackTrace());
+			System.out.println( " getData ì˜¤ë¥˜" + e.getStackTrace());
 		}finally {
 			try {
 //				pstmt.clearParameters();
@@ -64,7 +62,7 @@ public class DBTest {
 				e2.printStackTrace();
 			}
 		}
-		//È®ÀÎ¿ë
+		//í™•ì¸ìš©
 //		for(AirportList model : list) {
 //			System.out.println(": "+model.getKorName());
 //		}
@@ -74,16 +72,16 @@ public class DBTest {
 		ArrayList<AirportList> list = new ArrayList<AirportList>();
 		StringBuffer sql = new StringBuffer();
 		if( isInternational == true) {			
-			sql.append("select * from airportInfo where ÇÑ±Û±¹°¡¸í = \'"+ country + "\' AND ÇÑ±Û°øÇ×¸í LIKE '%±¹Á¦%' order by ÇÑ±Û°øÇ×¸í asc");
+			sql.append("select * from airportInfo where í•œê¸€êµ­ê°€ëª… = \'"+ country + "\' AND í•œê¸€ê³µí•­ëª… LIKE '%êµ­ì œ%' order by í•œê¸€ê³µí•­ëª… asc");
 		}else {
-			sql.append("select * from airportInfo where ÇÑ±Û±¹°¡¸í = \'"+ country + "\' order by ÇÑ±Û°øÇ×¸í asc");
+			sql.append("select * from airportInfo where í•œê¸€êµ­ê°€ëª… = \'"+ country + "\' order by í•œê¸€ê³µí•­ëª… asc");
 		}
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) { 
-				index = 1; 	//1ºÎÅÍ ½ÃÀÛ
+				index = 1; 	//1ë¶€í„° ì‹œì‘
 				String engName = rs.getString(index++);
 				String korName = rs.getString(index++);
 				String IATACode = rs.getString(index++);
@@ -98,7 +96,7 @@ public class DBTest {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println( " getData ¿À·ù" + e.getStackTrace());
+			System.out.println( " getData ì˜¤ë¥˜" + e.getStackTrace());
 		}finally {
 			try {
 //				pstmt.clearParameters();
@@ -110,7 +108,7 @@ public class DBTest {
 				e2.printStackTrace();
 			}
 		}
-		//È®ÀÎ¿ë
+		//í™•ì¸ìš©
 //		for(AirportList model : list) {
 //			System.out.println(": "+model.getKorName());
 //		}
@@ -119,12 +117,12 @@ public class DBTest {
 	public ArrayList<AirportList> getDataByNearby(String code) {
 		ArrayList<AirportList> list = new ArrayList<AirportList>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("select * from airportInfo where °øÇ×ÄÚµå2 LIKE \'"+ code.charAt(0) + "%%\' order by ÇÑ±Û±¹°¡¸í asc");
+		sql.append("select * from airportInfo where ê³µí•­ì½”ë“œ2 LIKE \'"+ code.charAt(0) + "%%\' order by í•œê¸€êµ­ê°€ëª… asc");
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			while(rs.next()) { 
-				index = 1; 	//1ºÎÅÍ ½ÃÀÛ
+				index = 1; 	//1ë¶€í„° ì‹œì‘
 				String engName = rs.getString(index++);
 				String korName = rs.getString(index++);
 				String IATACode = rs.getString(index++);
@@ -139,7 +137,7 @@ public class DBTest {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println( " getData ¿À·ù" + e.getStackTrace());
+			System.out.println( " getData ì˜¤ë¥˜" + e.getStackTrace());
 		}finally {
 			try {
 				if(rs != null) rs.close();
@@ -152,11 +150,11 @@ public class DBTest {
 		}
 		return list;
 	}
-	public String[] getData(String target) {
+	public String[] getContinentData() {
 		String[] data = new String[500];
 		int index=0;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select DISTINCT " + target +" from airportInfo order by "+target + " asc");
+		sql.append("select DISTINCT ì§€ì—­ from airportInfo order by ì§€ì—­ asc");
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
@@ -166,7 +164,63 @@ public class DBTest {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println( " getdata" + target+ "¿À·ù" + e.getStackTrace());
+			System.out.println( " getContinentdata" + "ì˜¤ë¥˜" + e.getStackTrace());
+		}finally {
+			try {
+//				pstmt.clearParameters();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+//				if(conn != null) conn.close();
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
+	public String[] getCountryData() {
+		String[] data = new String[500];
+		int index=0;
+		StringBuffer sql = new StringBuffer();
+		sql.append("select DISTINCT í•œê¸€êµ­ê°€ëª… from airportInfo order by í•œê¸€êµ­ê°€ëª… asc");
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			while(rs.next()) { 
+				data[index] = rs.getString(1);
+				index++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( " getContinentdata" + "ì˜¤ë¥˜" + e.getStackTrace());
+		}finally {
+			try {
+//				pstmt.clearParameters();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+//				if(conn != null) conn.close();
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
+	public String[] getData(String target) {
+		String[] data = new String[500];
+		int index=0;
+		StringBuffer sql = new StringBuffer();
+		sql.append("select DISTINCT í•œê¸€êµ­ê°€ëª… from airportInfo where ì§€ì—­ =\'"+target+"\' order by í•œê¸€êµ­ê°€ëª… asc");
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			while(rs.next()) { 
+				data[index] = rs.getString(1);
+				index++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( " getdata" + target+ "ì˜¤ë¥˜" + e.getStackTrace());
 		}finally {
 			try {
 //				pstmt.clearParameters();
@@ -187,7 +241,7 @@ public class DBTest {
 				conn.close();
 			}
 		} catch (SQLException e) {
-			System.out.println("[´İ±â ¿À·ù]\n" + e.getStackTrace());
+			System.out.println("[ë‹«ê¸° ì˜¤ë¥˜]\n" + e.getStackTrace());
 		}
 	}
 }

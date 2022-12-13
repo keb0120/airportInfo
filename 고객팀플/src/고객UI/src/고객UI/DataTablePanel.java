@@ -1,11 +1,11 @@
-package °í°´UI;
+package ê³ ê°UI;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.util.ArrayList;
-// ÀÎ±Ù °øÇ× È­¸é¿¡ ¾²ÀÌ´Â Å×ÀÌºí
+// ì¸ê·¼ ê³µí•­ í™”ë©´ì— ì“°ì´ëŠ” í…Œì´ë¸”
 public class DataTablePanel extends JPanel {
 	
 	static final int NAIRPORTS = 2603;
@@ -16,12 +16,12 @@ public class DataTablePanel extends JPanel {
     ArrayList<AirportList> herelist = new ArrayList<AirportList>();
     AirportList[] alist;
 	String[][] data2 = new String[NAIRPORTS][NCOL];
-    String[] header = { "³ª¶ó¸í", "°øÇ×ÄÚµå(ICAO)", "°øÇ×¸í" };
+    String[] header = { "ë‚˜ë¼ëª…", "ê³µí•­ì½”ë“œ(ICAO)", "ê³µí•­ëª…" };
     
     DBTest dbtest1 = new DBTest();
     
     public DataTablePanel() {
-    	//Å×½ºÆ®¿ë ÀÓÀÇ°ª
+    	//í…ŒìŠ¤íŠ¸ìš© ì„ì˜ê°’
 //    	herelist = dbtest1.getDataByNearby("OMAA");
     	herelist = dbtest1.getData();
     	alist = herelist.toArray(new AirportList[herelist.size()]);
@@ -35,7 +35,7 @@ public class DataTablePanel extends JPanel {
         	remove(sc);
         }
         sc = new JScrollPane(dataTable);
-        JLabel textarea = new JLabel("´õ ¿©Çà ÇÏ°í ½ÍÀº °÷ÀÌ ÀÖÀ¸½Å°¡¿ä?");
+        JLabel textarea = new JLabel("ë” ì—¬í–‰ í•˜ê³  ì‹¶ì€ ê³³ì´ ìˆìœ¼ì‹ ê°€ìš”?");
         this.add(textarea);
         this.add(sc);
         this.setVisible(true);
@@ -44,12 +44,12 @@ public class DataTablePanel extends JPanel {
     	if(paramCode == null) {
     		System.out.println("updatepanel error");
     	}else {
-    		//Å×½ºÆ®¿ë ÀÓÀÇ °ª ¼³Á¤
+    		//í…ŒìŠ¤íŠ¸ìš© ì„ì˜ ê°’ ì„¤ì •
     		herelist = dbtest1.getDataByNearby(paramCode);
 			alist = herelist.toArray(new AirportList[herelist.size()]);
 		    for(int i =0;i<herelist.size();i++) {
 		    	data2[i][0] = alist[i].getKorNation();
-		    	data2[i][1] = alist[i].getIATACode();
+		    	data2[i][1] = alist[i].getICAOCode();
 		    	data2[i][2] = alist[i].getKorName();
 		    }
 		    dataTable = new JTable(data2 , header);
@@ -57,7 +57,7 @@ public class DataTablePanel extends JPanel {
 		    	remove(sc);
 		    }
 		    sc = new JScrollPane(dataTable);
-		    JLabel textarea = new JLabel("´õ ¿©Çà ÇÏ°í ½ÍÀº °÷ÀÌ ÀÖÀ¸½Å°¡¿ä?");
+		    JLabel textarea = new JLabel("ë” ì—¬í–‰ í•˜ê³  ì‹¶ì€ ê³³ì´ ìˆìœ¼ì‹ ê°€ìš”?");
 		    this.add(textarea);
 		    this.add(sc);
 		    this.setVisible(true);

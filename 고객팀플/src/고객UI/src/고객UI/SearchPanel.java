@@ -1,6 +1,6 @@
-package °í°´UI;
+package ê³ ê°UI;
 
-import °í°´UI.PlaceholderTextField;
+import ê³ ê°UI.PlaceholderTextField;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,10 +13,10 @@ public class SearchPanel extends JPanel {
     public SearchPanel() {
 
         searchText = new PlaceholderTextField();
-        searchText.setPlaceholder("°øÇ×ÄÚµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+        searchText.setPlaceholder("ê³µí•­ì½”ë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”");
         searchText.setColumns(20);
 
-        searchBtn = new JButton("ÀÔ·Â");
+        searchBtn = new JButton("ì…ë ¥");
 
         searchBtn.addActionListener(new SearchBtnListener(searchText));
 

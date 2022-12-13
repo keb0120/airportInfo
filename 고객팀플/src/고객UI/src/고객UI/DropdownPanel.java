@@ -34,60 +34,28 @@ public class DropdownPanel extends JPanel {
 				String index = cb.getSelectedItem().toString();
 				switch(index) {
 					case "유럽":
-						country.removeAllItems();
-						countryArr = dbtest.getData("유럽");
-				        for (String str : countryArr) {
-				            country.addItem(str);            
-				        }
+				        setCountryCB("유럽");
 						break;
 					case "아프리카":
-						country.removeAllItems();
-						countryArr = dbtest.getData("아프리카");	
-				        for (String str : countryArr) {
-				            country.addItem(str);            
-				        }
+						setCountryCB("아프리카");
 						break;
 					case "중동": 
-						country.removeAllItems();
-						countryArr = dbtest.getData("중동");
-				        for (String str : countryArr) {
-				            country.addItem(str);            
-				        }
+						setCountryCB("중동");
 						break;
 					case "북미":
-						country.removeAllItems();
-						countryArr = dbtest.getData("북미");
-				        for (String str : countryArr) {
-				            country.addItem(str);            
-				        }
+						setCountryCB("북미");
 						break;
 					case "남미":
-						country.removeAllItems();
-						countryArr = dbtest.getData("남미");
-				        for (String str : countryArr) {
-				            country.addItem(str);            
-				        }
+						setCountryCB("남미");
 						break;
 					case "중남미":
-						country.removeAllItems();
-						countryArr = dbtest.getData("중남미");
-				        for (String str : countryArr) {
-				            country.addItem(str);            
-				        }
+						setCountryCB("중남미");
 						break;
 					case "아시아":
-						country.removeAllItems();
-						countryArr = dbtest.getData("아시아");
-				        for (String str : countryArr) {
-				            country.addItem(str);            
-				        }
+						setCountryCB("아시아");
 						break;
 					case "대양주":
-						country.removeAllItems();
-						countryArr = dbtest.getData("대양주");
-				        for (String str : countryArr) {
-				            country.addItem(str);            
-				        }
+						setCountryCB("대양주");
 						break;
 				}
 			}
@@ -98,13 +66,17 @@ public class DropdownPanel extends JPanel {
         for (String str : airportArr) {
             airport.addItem(str);
         }
-
         this.dropdownBtn = new JButton("검색");
-
         this.add(continent);
         this.add(country);
         this.add(airport);
         this.add(dropdownBtn);
     }
-
+    public void setCountryCB(String continentName) {
+    	country.removeAllItems();
+		countryArr = dbtest.getData(continentName);
+        for (String str : countryArr) {
+            country.addItem(str);            
+        }
+    }
 }

@@ -86,7 +86,7 @@ public class TablePanel extends JPanel {
 
     public void setDataByDropdown(String country, boolean isInternational) {
     	if(datatablePanel!=null){
-    		deleteDatatablePanel();
+    		deleteDatatablePanel();	
     		String[] header = { "나라이름", "공항코드(ICAO)", "공항이름", "Travel More" };
         	herelist = dbtest1.getDataByCountry(country,isInternational);
         	AirportList[] alist = herelist.toArray(new AirportList[herelist.size()]);
